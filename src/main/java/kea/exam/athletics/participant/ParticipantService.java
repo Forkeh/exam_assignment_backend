@@ -3,12 +3,12 @@ package kea.exam.athletics.participant;
 import kea.exam.athletics.discipline.Discipline;
 import kea.exam.athletics.discipline.DisciplineRepository;
 import kea.exam.athletics.discipline.DisciplineService;
-import kea.exam.athletics.discipline.utils.DisciplineMapper;
 import kea.exam.athletics.enums.Gender;
 import kea.exam.athletics.exceptions.EntityNotFoundException;
 import kea.exam.athletics.participant.dto.ParticipantRequestDTO;
 import kea.exam.athletics.participant.dto.ParticipantResponseDTO;
 import kea.exam.athletics.participant.dto.ParticipantResponseFullDTO;
+import kea.exam.athletics.participant.utils.ParticipantMapper;
 import kea.exam.athletics.result.ResultService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,7 +16,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,14 +23,12 @@ public class ParticipantService {
 
 
     private final ParticipantRepository participantRepository;
-    private final DisciplineMapper disciplineMapper;
     private final ResultService resultService;
     private final DisciplineService disciplineService;
     private final DisciplineRepository disciplineRepository;
 
-    public ParticipantService(ParticipantRepository participantRepository, DisciplineMapper disciplineMapper, ResultService resultService, DisciplineService disciplineService, DisciplineRepository disciplineRepository) {
+    public ParticipantService(ParticipantRepository participantRepository, ResultService resultService, DisciplineService disciplineService, DisciplineRepository disciplineRepository) {
         this.participantRepository = participantRepository;
-        this.disciplineMapper = disciplineMapper;
         this.resultService = resultService;
         this.disciplineService = disciplineService;
         this.disciplineRepository = disciplineRepository;
@@ -80,12 +77,9 @@ public class ParticipantService {
             participants = participantRepository.findAll(pageable);
         }
 
-        return participants.map(this::toDTO);
+        ParticipantMapper participantMapper = new ParticipantMapper();
 
-//        return participantRepository.findAll()
-//                .stream()
-//                .map(this::toDTO)
-//                .toList();
+        return participants.map(participantMapper::toDTO);
 
     }
 
@@ -95,7 +89,9 @@ public class ParticipantService {
         Participant participant = participantRepository.findById(participantId)
                 .orElseThrow(() -> new EntityNotFoundException("Event", participantId));
 
-        return toFullDTO(participant);
+        ParticipantMapper participantMapper = new ParticipantMapper();
+
+        return participantMapper.toFullDTO(participant);
 
     }
 
@@ -120,38 +116,11 @@ public class ParticipantService {
 
         participantRepository.save(participant);
 
-        return toDTO(participant);
+        ParticipantMapper participantMapper = new ParticipantMapper();
+
+        return participantMapper.toDTO(participant);
     }
 
-    private ParticipantResponseFullDTO toFullDTO(Participant participant) {
-
-
-        return new ParticipantResponseFullDTO(
-                participant.getId(),
-                participant.getName(),
-                participant.getGender(),
-                participant.getAge(),
-                participant.getClub(),
-                participant.getDisciplines()
-                        .stream()
-                        .map(disciplineMapper::toSmallDTO)
-                        .toList()
-        );
-    }
-
-    private ParticipantResponseDTO toDTO(Participant participant) {
-        return new ParticipantResponseDTO(
-                participant.getId(),
-                participant.getName(),
-                participant.getGender(),
-                participant.getAge(),
-                participant.getClub(),
-                participant.getDisciplines()
-                        .stream()
-                        .map(Discipline::getName)
-                        .toList()
-        );
-    }
 
     public ParticipantResponseDTO deleteParticipantById(Long participantId) {
         Participant participant = participantRepository.findById(participantId)
@@ -166,7 +135,9 @@ public class ParticipantService {
 
         participantRepository.delete(participant);
 
-        return toDTO(participant);
+        ParticipantMapper participantMapper = new ParticipantMapper();
+
+        return participantMapper.toDTO(participant);
     }
 
     public Discipline addParticipantToDiscipline(Long disciplineId, Long participantId) {
@@ -214,7 +185,9 @@ public class ParticipantService {
 
         participantRepository.save(participantToUpdate);
 
-        return toDTO(participantToUpdate);
+        ParticipantMapper participantMapper = new ParticipantMapper();
+
+        return participantMapper.toDTO(participantToUpdate);
 
 
     }

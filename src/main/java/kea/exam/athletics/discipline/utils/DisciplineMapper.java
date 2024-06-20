@@ -4,7 +4,6 @@ import kea.exam.athletics.discipline.Discipline;
 import kea.exam.athletics.discipline.dto.DisciplineResponseSmallDTO;
 import org.springframework.stereotype.Service;
 
-@Service
 public class DisciplineMapper {
 
 
