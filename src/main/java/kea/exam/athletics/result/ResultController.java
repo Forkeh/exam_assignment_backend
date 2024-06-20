@@ -42,4 +42,9 @@ public class ResultController {
     public ResponseEntity<ResultResponseDTO> updateResult(@RequestBody ResultRequestDTO resultRequestDTO, @PathVariable Long resultId) {
         return ResponseEntity.ok(resultService.updateResult(resultRequestDTO, resultId));
     }
+
+    @DeleteMapping("/{resultId}")
+    public ResponseEntity<ResultResponseDTO> deleteResultById(@PathVariable Long resultId) {
+        return ResponseEntity.ok(resultService.deleteResultById(resultId));
+    }
 }

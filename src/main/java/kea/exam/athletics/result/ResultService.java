@@ -56,17 +56,20 @@ public class ResultService {
     }
 
 
-    public Result deleteResultById(Long resultId) {
+    public ResultResponseDTO deleteResultById(Long resultId) {
+        ResultMapper resultMapper = new ResultMapper();
+
         Result result = resultRepository.findById(resultId)
                 .orElseThrow(() -> new EntityNotFoundException("Result", resultId));
+
         resultRepository.delete(result);
-        return result;
+
+        return resultMapper.toDTO(result);
     }
 
     public void deleteResultsByParticipant(Participant participant) {
         List<Result> results = resultRepository.findAllByParticipant(participant);
         resultRepository.deleteAll(results);
-
     }
 
     public ResultResponseDTO createResult(ResultRequestDTO resultRequestDTO) {
