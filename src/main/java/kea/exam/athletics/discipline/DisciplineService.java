@@ -25,15 +25,6 @@ public class DisciplineService {
     }
 
 
-    public DisciplineResponseSmallDTO toSmallDTO(Discipline discipline) {
-        return new DisciplineResponseSmallDTO(
-                discipline.getId(),
-                discipline.getName(),
-                discipline.getResultType()
-                        .toString()
-        );
-    }
-
     public List<DisciplineResponseSmallDTO> getAllDisciplines() {
         return disciplineRepository.findAll()
                 .stream()
@@ -47,6 +38,25 @@ public class DisciplineService {
 
         discipline.getParticipants()
                 .add(participant);
+
+        return disciplineRepository.save(discipline);
+    }
+
+    public DisciplineResponseSmallDTO toSmallDTO(Discipline discipline) {
+        return new DisciplineResponseSmallDTO(
+                discipline.getId(),
+                discipline.getName(),
+                discipline.getResultType()
+                        .toString()
+        );
+    }
+
+    public Discipline removeParticipantFromDiscipline(Long disciplineId, Long participantId) {
+        Discipline discipline = getDisciplineById(disciplineId);
+        Participant participant = participantService.getParticipantEntityById(participantId);
+
+        discipline.getParticipants()
+                .remove(participant);
 
         return disciplineRepository.save(discipline);
     }
