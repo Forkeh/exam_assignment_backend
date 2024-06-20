@@ -38,7 +38,7 @@ public class InitData implements ApplicationRunner {
         System.out.println("Initializing data...");
 
         init();
-        
+
     }
 
 
@@ -373,6 +373,25 @@ public class InitData implements ApplicationRunner {
         results.add(new Result(ResultType.TIME, "10.500", LocalDateTime.of(2024, 1, 1, 0, 0), participants.get(0), disciplines.get(0)));
         results.add(new Result(ResultType.DISTANCE, "1200", LocalDateTime.of(2024, 2, 5, 0, 0), participants.get(1), disciplines.get(3)));
         results.add(new Result(ResultType.POINTS, "25", LocalDateTime.of(2024, 3, 10, 0, 0), participants.get(3), disciplines.get(6)));
+        results.add(new Result(ResultType.TIME, "20.500", LocalDateTime.of(2024, 4, 15, 0, 0), participants.get(5), disciplines.get(1)));
+        results.add(new Result(ResultType.DISTANCE, "1500", LocalDateTime.of(2024, 5, 20, 0, 0), participants.get(7), disciplines.get(5)));
+        results.add(new Result(ResultType.POINTS, "30", LocalDateTime.of(2024, 6, 25, 0, 0), participants.get(9), disciplines.get(7)));
+        results.add(new Result(ResultType.TIME, "30.500", LocalDateTime.of(2024, 7, 30, 0, 0), participants.get(11), disciplines.get(2)));
+        results.add(new Result(ResultType.DISTANCE, "1800", LocalDateTime.of(2024, 8, 5, 0, 0), participants.get(13), disciplines.get(4)));
+        results.add(new Result(ResultType.POINTS, "35", LocalDateTime.of(2024, 9, 10, 0, 0), participants.get(15), disciplines.get(8)));
+        results.add(new Result(ResultType.TIME, "40.500", LocalDateTime.of(2024, 10, 15, 0, 0), participants.get(17), disciplines.get(0)));
+        results.add(new Result(ResultType.DISTANCE, "2000", LocalDateTime.of(2024, 11, 20, 0, 0), participants.get(19), disciplines.get(3)));
+        results.add(new Result(ResultType.POINTS, "40", LocalDateTime.of(2024, 12, 25, 0, 0), participants.get(21), disciplines.get(6)));
+        results.add(new Result(ResultType.TIME, "50.500", LocalDateTime.of(2025, 1, 1, 0, 0), participants.get(23), disciplines.get(1)));
+        results.add(new Result(ResultType.DISTANCE, "2500", LocalDateTime.of(2025, 2, 5, 0, 0), participants.get(25), disciplines.get(5)));
+        results.add(new Result(ResultType.POINTS, "45", LocalDateTime.of(2025, 3, 10, 0, 0), participants.get(27), disciplines.get(7)));
+        results.add(new Result(ResultType.TIME, "60.500", LocalDateTime.of(2025, 4, 15, 0, 0), participants.get(29), disciplines.get(2)));
+        results.add(new Result(ResultType.DISTANCE, "3000", LocalDateTime.of(2025, 5, 20, 0, 0), participants.get(31), disciplines.get(6)));
+        results.add(new Result(ResultType.POINTS, "50", LocalDateTime.of(2025, 6, 25, 0, 0), participants.get(33), disciplines.get(8)));
+        results.add(new Result(ResultType.TIME, "70.500", LocalDateTime.of(2025, 7, 30, 0, 0), participants.get(35), disciplines.get(0)));
+        results.add(new Result(ResultType.DISTANCE, "3500", LocalDateTime.of(2025, 8, 5, 0, 0), participants.get(37), disciplines.get(3)));
+        results.add(new Result(ResultType.POINTS, "55", LocalDateTime.of(2025, 9, 10, 0, 0), participants.get(39), disciplines.get(7)));
+
 
         resultRepository.saveAll(results);
     }
