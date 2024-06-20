@@ -40,6 +40,7 @@ public class ParticipantService {
             Optional<String> sortDir,
             Optional<String> sortBy,
             Optional<String> filterBy,
+            Optional<String> filterValue,
             Optional<String> searchBy
     ) {
 
@@ -50,8 +51,33 @@ public class ParticipantService {
                 sortBy.orElse("id")
         );
 
-        return participantRepository.findAll(pageable)
-                .map(this::toDTO);
+        Page<Participant> participants;
+
+        if (filterBy.isPresent() && filterValue.isPresent()) {
+            participants = switch (filterBy.get()
+                    .toLowerCase()) {
+                case "gender" -> participantRepository.findAllByGender(
+                        pageable,
+                        Gender.valueOf(filterValue.get()
+                                .toUpperCase())
+                );
+                case "club" -> participantRepository.findAllByClubContainsIgnoreCase(
+                        pageable,
+                        filterValue.get()
+                );
+                case "discipline" -> participantRepository.findAllByDisciplinesId(
+                        pageable,
+                        Long.parseLong(filterValue.get())
+                );
+                default -> throw new IllegalArgumentException("Invalid filterBy value: " + filterBy.get());
+            };
+        } else if (searchBy.isPresent()) {
+            participants = participantRepository.findAllByNameContainsIgnoreCase(pageable, searchBy.get());
+        } else {
+            participants = participantRepository.findAll(pageable);
+        }
+
+        return participants.map(this::toDTO);
 
 //        return participantRepository.findAll()
 //                .stream()

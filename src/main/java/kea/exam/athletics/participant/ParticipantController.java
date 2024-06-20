@@ -29,9 +29,10 @@ public class ParticipantController {
             @RequestParam Optional<String> sortDir,
             @RequestParam Optional<String> sortBy,
             @RequestParam Optional<String> filterBy,
+            @RequestParam Optional<String> filterValue,
             @RequestParam Optional<String> searchBy
     ) {
-        return ResponseEntity.ok(participantService.getAllParticipants(pageIndex, pageSize, sortDir, sortBy, filterBy, searchBy));
+        return ResponseEntity.ok(participantService.getAllParticipants(pageIndex, pageSize, sortDir, sortBy, filterBy, filterValue, searchBy));
     }
 
     @GetMapping("/{participantId}")
