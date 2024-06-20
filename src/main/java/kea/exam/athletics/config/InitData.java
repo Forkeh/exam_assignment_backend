@@ -12,13 +12,16 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class InitData implements ApplicationRunner {
 
-    private final BookRepository bookRepository;
+    private final List<Participant> participants = new ArrayList<>();
+    private final List<Discipline> disciplines = new ArrayList<>();
 
+    private final BookRepository bookRepository;
     private final ParticipantRepository participantRepository;
     private final DisciplineRepository disciplineRepository;
 
@@ -33,6 +36,261 @@ public class InitData implements ApplicationRunner {
         System.out.println("Initializing data...");
 
         init();
+        createParticipants();
+        createDisciplines();
+        assignDisciplinesToParticipants();
+    }
+
+    private void assignDisciplinesToParticipants() {
+        participants.get(0)
+                .getDisciplines()
+                .add(disciplines.get(0));
+        participants.get(0)
+                .getDisciplines()
+                .add(disciplines.get(1));
+        participants.get(1)
+                .getDisciplines()
+                .add(disciplines.get(2));
+        participants.get(1)
+                .getDisciplines()
+                .add(disciplines.get(3));
+        participants.get(2)
+                .getDisciplines()
+                .add(disciplines.get(4));
+        participants.get(2)
+                .getDisciplines()
+                .add(disciplines.get(5));
+        participants.get(3)
+                .getDisciplines()
+                .add(disciplines.get(6));
+        participants.get(3)
+                .getDisciplines()
+                .add(disciplines.get(7));
+        participants.get(4)
+                .getDisciplines()
+                .add(disciplines.get(8));
+        participants.get(4)
+                .getDisciplines()
+                .add(disciplines.get(0));
+
+        participants.get(5)
+                .getDisciplines()
+                .add(disciplines.get(1));
+        participants.get(5)
+                .getDisciplines()
+                .add(disciplines.get(2));
+        participants.get(6)
+                .getDisciplines()
+                .add(disciplines.get(3));
+        participants.get(6)
+                .getDisciplines()
+                .add(disciplines.get(4));
+        participants.get(7)
+                .getDisciplines()
+                .add(disciplines.get(5));
+        participants.get(7)
+                .getDisciplines()
+                .add(disciplines.get(6));
+        participants.get(8)
+                .getDisciplines()
+                .add(disciplines.get(7));
+        participants.get(8)
+                .getDisciplines()
+                .add(disciplines.get(8));
+        participants.get(9)
+                .getDisciplines()
+                .add(disciplines.get(0));
+        participants.get(9)
+                .getDisciplines()
+                .add(disciplines.get(1));
+        participants.get(10)
+                .getDisciplines()
+                .add(disciplines.get(2));
+        participants.get(10)
+                .getDisciplines()
+                .add(disciplines.get(3));
+        participants.get(11)
+                .getDisciplines()
+                .add(disciplines.get(4));
+        participants.get(11)
+                .getDisciplines()
+                .add(disciplines.get(5));
+        participants.get(12)
+                .getDisciplines()
+                .add(disciplines.get(6));
+        participants.get(12)
+                .getDisciplines()
+                .add(disciplines.get(7));
+        participants.get(13)
+                .getDisciplines()
+                .add(disciplines.get(8));
+        participants.get(13)
+                .getDisciplines()
+                .add(disciplines.get(0));
+        participants.get(14)
+                .getDisciplines()
+                .add(disciplines.get(1));
+        participants.get(14)
+                .getDisciplines()
+                .add(disciplines.get(2));
+
+        participants.get(15)
+                .getDisciplines()
+                .add(disciplines.get(3));
+        participants.get(15)
+                .getDisciplines()
+                .add(disciplines.get(4));
+        participants.get(16)
+                .getDisciplines()
+                .add(disciplines.get(5));
+        participants.get(16)
+                .getDisciplines()
+                .add(disciplines.get(6));
+        participants.get(17)
+                .getDisciplines()
+                .add(disciplines.get(7));
+        participants.get(17)
+                .getDisciplines()
+                .add(disciplines.get(8));
+        participants.get(18)
+                .getDisciplines()
+                .add(disciplines.get(0));
+        participants.get(18)
+                .getDisciplines()
+                .add(disciplines.get(1));
+        participants.get(19)
+                .getDisciplines()
+                .add(disciplines.get(2));
+        participants.get(19)
+                .getDisciplines()
+                .add(disciplines.get(3));
+
+        participants.get(20)
+                .getDisciplines()
+                .add(disciplines.get(4));
+        participants.get(20)
+                .getDisciplines()
+                .add(disciplines.get(5));
+        participants.get(21)
+                .getDisciplines()
+                .add(disciplines.get(6));
+        participants.get(21)
+                .getDisciplines()
+                .add(disciplines.get(7));
+        participants.get(22)
+                .getDisciplines()
+                .add(disciplines.get(8));
+        participants.get(22)
+                .getDisciplines()
+                .add(disciplines.get(0));
+        participants.get(23)
+                .getDisciplines()
+                .add(disciplines.get(1));
+        participants.get(23)
+                .getDisciplines()
+                .add(disciplines.get(2));
+        participants.get(24)
+                .getDisciplines()
+                .add(disciplines.get(3));
+        participants.get(24)
+                .getDisciplines()
+                .add(disciplines.get(4));
+
+        participants.get(25)
+                .getDisciplines()
+                .add(disciplines.get(5));
+        participants.get(25)
+                .getDisciplines()
+                .add(disciplines.get(6));
+        participants.get(26)
+                .getDisciplines()
+                .add(disciplines.get(7));
+        participants.get(26)
+                .getDisciplines()
+                .add(disciplines.get(8));
+        participants.get(27)
+                .getDisciplines()
+                .add(disciplines.get(0));
+        participants.get(27)
+                .getDisciplines()
+                .add(disciplines.get(1));
+        participants.get(28)
+                .getDisciplines()
+                .add(disciplines.get(2));
+        participants.get(28)
+                .getDisciplines()
+                .add(disciplines.get(3));
+        participants.get(29)
+                .getDisciplines()
+                .add(disciplines.get(4));
+        participants.get(29)
+                .getDisciplines()
+                .add(disciplines.get(5));
+
+        participants.get(30)
+                .getDisciplines()
+                .add(disciplines.get(6));
+        participants.get(30)
+                .getDisciplines()
+                .add(disciplines.get(7));
+        participants.get(31)
+                .getDisciplines()
+                .add(disciplines.get(8));
+        participants.get(31)
+                .getDisciplines()
+                .add(disciplines.get(0));
+        participants.get(32)
+                .getDisciplines()
+                .add(disciplines.get(1));
+        participants.get(32)
+                .getDisciplines()
+                .add(disciplines.get(2));
+        participants.get(33)
+                .getDisciplines()
+                .add(disciplines.get(3));
+        participants.get(33)
+                .getDisciplines()
+                .add(disciplines.get(4));
+        participants.get(34)
+                .getDisciplines()
+                .add(disciplines.get(5));
+        participants.get(34)
+                .getDisciplines()
+                .add(disciplines.get(6));
+
+        participants.get(35)
+                .getDisciplines()
+                .add(disciplines.get(7));
+        participants.get(35)
+                .getDisciplines()
+                .add(disciplines.get(8));
+        participants.get(36)
+                .getDisciplines()
+                .add(disciplines.get(0));
+        participants.get(36)
+                .getDisciplines()
+                .add(disciplines.get(1));
+        participants.get(37)
+                .getDisciplines()
+                .add(disciplines.get(2));
+        participants.get(37)
+                .getDisciplines()
+                .add(disciplines.get(3));
+        participants.get(38)
+                .getDisciplines()
+                .add(disciplines.get(4));
+        participants.get(38)
+                .getDisciplines()
+                .add(disciplines.get(5));
+        participants.get(39)
+                .getDisciplines()
+                .add(disciplines.get(6));
+        participants.get(39)
+                .getDisciplines()
+                .add(disciplines.get(7));
+
+        participantRepository.saveAll(participants);
+
     }
 
     private void init() {
@@ -52,67 +310,71 @@ public class InitData implements ApplicationRunner {
         );
         bookRepository.saveAll(books);
 
-        List<Participant> participants = List.of(
-                new Participant("John", Gender.MALE, 25, "Lions Club"),
-                new Participant("Emma", Gender.FEMALE, 22, "Tigers Club"),
-                new Participant("Liam", Gender.MALE, 30, "Lions Club"),
-                new Participant("Olivia", Gender.FEMALE, 27, "Bears Club"),
-                new Participant("Noah", Gender.MALE, 24, "Wolves Club"),
-                new Participant("Ava", Gender.FEMALE, 29, "Tigers Club"),
-                new Participant("William", Gender.MALE, 28, "Hawks Club"),
-                new Participant("Sophia", Gender.FEMALE, 26, "Bears Club"),
-                new Participant("James", Gender.MALE, 23, "Eagles Club"),
-                new Participant("Isabella", Gender.FEMALE, 25, "Hawks Club"),
-                new Participant("Benjamin", Gender.MALE, 31, "Wolves Club"),
-                new Participant("Mia", Gender.FEMALE, 22, "Tigers Club"),
-                new Participant("Lucas", Gender.MALE, 27, "Lions Club"),
-                new Participant("Charlotte", Gender.FEMALE, 28, "Eagles Club"),
-                new Participant("Mason", Gender.MALE, 26, "Bears Club"),
-                new Participant("Amelia", Gender.FEMALE, 24, "Hawks Club"),
-                new Participant("Ethan", Gender.MALE, 29, "Lions Club"),
-                new Participant("Harper", Gender.FEMALE, 30, "Wolves Club"),
-                new Participant("Alexander", Gender.MALE, 25, "Tigers Club"),
-                new Participant("Evelyn", Gender.FEMALE, 23, "Bears Club"),
-                new Participant("Jacob", Gender.MALE, 28, "Eagles Club"),
-                new Participant("Abigail", Gender.FEMALE, 27, "Hawks Club"),
-                new Participant("Michael", Gender.MALE, 26, "Tigers Club"),
-                new Participant("Ella", Gender.FEMALE, 24, "Wolves Club"),
-                new Participant("Daniel", Gender.MALE, 30, "Lions Club"),
-                new Participant("Scarlett", Gender.FEMALE, 29, "Hawks Club"),
-                new Participant("Henry", Gender.MALE, 25, "Bears Club"),
-                new Participant("Grace", Gender.FEMALE, 22, "Eagles Club"),
-                new Participant("Jackson", Gender.MALE, 31, "Wolves Club"),
-                new Participant("Zoe", Gender.FEMALE, 23, "Tigers Club"),
-                new Participant("Charlie", Gender.MALE, 6, "Kittens Club"),
-                new Participant("Lucy", Gender.FEMALE, 7, "Puppies Club"),
-                new Participant("Oscar", Gender.MALE, 8, "Kittens Club"),
-                new Participant("Lily", Gender.FEMALE, 9, "Puppies Club"),
-                new Participant("George", Gender.MALE, 10, "Kittens Club"),
-                new Participant("Hannah", Gender.FEMALE, 11, "Puppies Club"),
-                new Participant("Jack", Gender.MALE, 12, "Kittens Club"),
-                new Participant("Sophie", Gender.FEMALE, 13, "Puppies Club"),
-                new Participant("Ryan", Gender.MALE, 40, "Old Guards Club"),
-                new Participant("Emily", Gender.FEMALE, 42, "Old Guards Club"),
-                new Participant("Ethan", Gender.MALE, 44, "Old Guards Club"),
-                new Participant("Ella", Gender.FEMALE, 46, "Old Guards Club"),
-                new Participant("Daniel", Gender.MALE, 48, "Old Guards Club"),
-                new Participant("Scarlett", Gender.FEMALE, 50, "Old Guards Club")
-        );
+    }
+
+
+    private void createParticipants() {
+
+        participants.add(new Participant("John", Gender.MALE, 25, "Lions Club"));
+        participants.add(new Participant("Emma", Gender.FEMALE, 22, "Tigers Club"));
+        participants.add(new Participant("Liam", Gender.MALE, 30, "Lions Club"));
+        participants.add(new Participant("Olivia", Gender.FEMALE, 27, "Bears Club"));
+        participants.add(new Participant("Noah", Gender.MALE, 24, "Wolves Club"));
+        participants.add(new Participant("Ava", Gender.FEMALE, 29, "Tigers Club"));
+        participants.add(new Participant("William", Gender.MALE, 28, "Hawks Club"));
+        participants.add(new Participant("Sophia", Gender.FEMALE, 26, "Bears Club"));
+        participants.add(new Participant("James", Gender.MALE, 23, "Eagles Club"));
+        participants.add(new Participant("Isabella", Gender.FEMALE, 25, "Hawks Club"));
+        participants.add(new Participant("Benjamin", Gender.MALE, 31, "Wolves Club"));
+        participants.add(new Participant("Mia", Gender.FEMALE, 22, "Tigers Club"));
+        participants.add(new Participant("Lucas", Gender.MALE, 27, "Lions Club"));
+        participants.add(new Participant("Charlotte", Gender.FEMALE, 28, "Eagles Club"));
+        participants.add(new Participant("Mason", Gender.MALE, 26, "Bears Club"));
+        participants.add(new Participant("Amelia", Gender.FEMALE, 24, "Hawks Club"));
+        participants.add(new Participant("Ethan", Gender.MALE, 29, "Lions Club"));
+        participants.add(new Participant("Harper", Gender.FEMALE, 30, "Wolves Club"));
+        participants.add(new Participant("Alexander", Gender.MALE, 25, "Tigers Club"));
+        participants.add(new Participant("Evelyn", Gender.FEMALE, 23, "Bears Club"));
+        participants.add(new Participant("Jacob", Gender.MALE, 28, "Eagles Club"));
+        participants.add(new Participant("Abigail", Gender.FEMALE, 27, "Hawks Club"));
+        participants.add(new Participant("Michael", Gender.MALE, 26, "Tigers Club"));
+        participants.add(new Participant("Ella", Gender.FEMALE, 24, "Wolves Club"));
+        participants.add(new Participant("Daniel", Gender.MALE, 30, "Lions Club"));
+        participants.add(new Participant("Scarlett", Gender.FEMALE, 29, "Hawks Club"));
+        participants.add(new Participant("Henry", Gender.MALE, 25, "Bears Club"));
+        participants.add(new Participant("Grace", Gender.FEMALE, 22, "Eagles Club"));
+        participants.add(new Participant("Jackson", Gender.MALE, 31, "Wolves Club"));
+        participants.add(new Participant("Zoe", Gender.FEMALE, 23, "Tigers Club"));
+        participants.add(new Participant("Charlie", Gender.MALE, 6, "Kittens Club"));
+        participants.add(new Participant("Lucy", Gender.FEMALE, 7, "Puppies Club"));
+        participants.add(new Participant("Oscar", Gender.MALE, 8, "Kittens Club"));
+        participants.add(new Participant("Lily", Gender.FEMALE, 9, "Puppies Club"));
+        participants.add(new Participant("George", Gender.MALE, 10, "Kittens Club"));
+        participants.add(new Participant("Hannah", Gender.FEMALE, 11, "Puppies Club"));
+        participants.add(new Participant("Jack", Gender.MALE, 12, "Kittens Club"));
+        participants.add(new Participant("Sophie", Gender.FEMALE, 13, "Puppies Club"));
+        participants.add(new Participant("Ryan", Gender.MALE, 40, "Old Guards Club"));
+        participants.add(new Participant("Emily", Gender.FEMALE, 42, "Old Guards Club"));
+        participants.add(new Participant("Ethan", Gender.MALE, 44, "Old Guards Club"));
+
 
         participantRepository.saveAll(participants);
+    }
 
-        List<Discipline> disciplines = List.of(
-                new Discipline("100m Sprint", ResultType.TIME),
-                new Discipline("200m Sprint", ResultType.TIME),
-                new Discipline("400m Sprint", ResultType.TIME),
-                new Discipline("Long Jump", ResultType.DISTANCE),
-                new Discipline("Triple Jump", ResultType.DISTANCE),
-                new Discipline("Shot Put", ResultType.DISTANCE),
-                new Discipline("Decathlon", ResultType.POINTS),
-                new Discipline("Heptathlon", ResultType.POINTS),
-                new Discipline("Pentathlon", ResultType.POINTS)
-        );
+    private void createDisciplines() {
+
+        disciplines.add(new Discipline("100m Sprint", ResultType.TIME));
+        disciplines.add(new Discipline("200m Sprint", ResultType.TIME));
+        disciplines.add(new Discipline("400m Sprint", ResultType.TIME));
+        disciplines.add(new Discipline("Long Jump", ResultType.DISTANCE));
+        disciplines.add(new Discipline("Triple Jump", ResultType.DISTANCE));
+        disciplines.add(new Discipline("Shot Put", ResultType.DISTANCE));
+        disciplines.add(new Discipline("Decathlon", ResultType.POINTS));
+        disciplines.add(new Discipline("Heptathlon", ResultType.POINTS));
+        disciplines.add(new Discipline("Pentathlon", ResultType.POINTS));
 
         disciplineRepository.saveAll(disciplines);
     }
+
+
 }

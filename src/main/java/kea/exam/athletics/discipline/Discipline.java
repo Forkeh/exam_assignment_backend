@@ -2,9 +2,13 @@ package kea.exam.athletics.discipline;
 
 import jakarta.persistence.*;
 import kea.exam.athletics.enums.ResultType;
+import kea.exam.athletics.participant.Participant;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -20,6 +24,14 @@ public class Discipline {
 
     @Enumerated(EnumType.STRING)
     private ResultType resultType;
+
+    @ManyToMany
+    @JoinTable(
+            name = "participant_discipline",
+            joinColumns = @JoinColumn(name = "discipline_id"),
+            inverseJoinColumns = @JoinColumn(name = "participant_id")
+    )
+    private Set<Participant> participants = new HashSet<>();
 
     public Discipline(String name, ResultType resultType) {
         this.name = name;
