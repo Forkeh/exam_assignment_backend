@@ -9,6 +9,7 @@ import kea.exam.athletics.exceptions.EntityNotFoundException;
 import kea.exam.athletics.participant.dto.ParticipantRequestDTO;
 import kea.exam.athletics.participant.dto.ParticipantResponseDTO;
 import kea.exam.athletics.participant.dto.ParticipantResponseFullDTO;
+import kea.exam.athletics.result.ResultService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -20,10 +21,12 @@ public class ParticipantService {
 
     private final ParticipantRepository participantRepository;
     private final DisciplineMapper disciplineMapper;
+    private final ResultService resultService;
 
-    public ParticipantService(ParticipantRepository participantRepository, DisciplineMapper disciplineMapper) {
+    public ParticipantService(ParticipantRepository participantRepository, DisciplineMapper disciplineMapper, ResultService resultService) {
         this.participantRepository = participantRepository;
         this.disciplineMapper = disciplineMapper;
+        this.resultService = resultService;
     }
 
     public List<ParticipantResponseDTO> getAllParticipants() {
@@ -95,5 +98,21 @@ public class ParticipantService {
                         .map(Discipline::getName)
                         .toList()
         );
+    }
+
+    public ParticipantResponseDTO deleteParticipantById(Long participantId) {
+        Participant participant = participantRepository.findById(participantId)
+                .orElseThrow(() -> new EntityNotFoundException("Participant", participantId));
+
+        // TODO: Better solution?
+        // Force initialization of the collection
+        participant.getDisciplines()
+                .size();
+
+        resultService.deleteResultsByParticipant(participant);
+
+        participantRepository.delete(participant);
+
+        return toDTO(participant);
     }
 }

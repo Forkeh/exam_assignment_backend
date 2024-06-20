@@ -33,4 +33,9 @@ public class ParticipantController {
     public ResponseEntity<ParticipantResponseDTO> createParticipant(@RequestBody ParticipantRequestDTO participantRequestDTO) {
         return ResponseEntity.ok(participantService.createParticipant(participantRequestDTO));
     }
+
+    @DeleteMapping("/{participantId}")
+    public ResponseEntity<ParticipantResponseDTO> deleteParticipantById(@PathVariable Long participantId) {
+        return ResponseEntity.ok(participantService.deleteParticipantById(participantId));
+    }
 }

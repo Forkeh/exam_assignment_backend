@@ -25,7 +25,8 @@ public class Discipline {
     @Enumerated(EnumType.STRING)
     private ResultType resultType;
 
-    @ManyToMany
+
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "participant_discipline",
             joinColumns = @JoinColumn(name = "discipline_id"),
