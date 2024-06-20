@@ -1,4 +1,4 @@
-package kea.exam.template.book;
+package kea.exam.athletics.book;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

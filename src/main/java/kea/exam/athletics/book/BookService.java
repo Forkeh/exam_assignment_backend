@@ -1,4 +1,4 @@
-package kea.exam.template.book;
+package kea.exam.athletics.book;
 
 import org.springframework.stereotype.Service;
 

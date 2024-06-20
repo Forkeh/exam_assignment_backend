@@ -1,4 +1,4 @@
-package kea.exam.template.exceptions;
+package kea.exam.athletics.exceptions;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package kea.exam.template;
+package kea.exam.athletics;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

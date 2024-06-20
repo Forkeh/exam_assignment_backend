@@ -1,4 +1,4 @@
-package kea.exam.template.exceptions;
+package kea.exam.athletics.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
