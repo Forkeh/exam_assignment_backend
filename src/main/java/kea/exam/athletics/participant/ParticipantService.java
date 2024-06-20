@@ -10,10 +10,15 @@ import kea.exam.athletics.participant.dto.ParticipantRequestDTO;
 import kea.exam.athletics.participant.dto.ParticipantResponseDTO;
 import kea.exam.athletics.participant.dto.ParticipantResponseFullDTO;
 import kea.exam.athletics.result.ResultService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ParticipantService {
@@ -29,11 +34,29 @@ public class ParticipantService {
         this.resultService = resultService;
     }
 
-    public List<ParticipantResponseDTO> getAllParticipants() {
-        return participantRepository.findAll()
-                .stream()
-                .map(this::toDTO)
-                .toList();
+    public Page<ParticipantResponseDTO> getAllParticipants(
+            Integer pageNum,
+            Integer pageSize,
+            Optional<String> sortDir,
+            Optional<String> sortBy,
+            Optional<String> filterBy,
+            Optional<String> searchBy
+    ) {
+
+        Pageable pageable = PageRequest.of(
+                pageNum,
+                pageSize,
+                Sort.Direction.valueOf(sortDir.orElse("ASC")),
+                sortBy.orElse("id")
+        );
+
+        return participantRepository.findAll(pageable)
+                .map(this::toDTO);
+
+//        return participantRepository.findAll()
+//                .stream()
+//                .map(this::toDTO)
+//                .toList();
 
     }
 

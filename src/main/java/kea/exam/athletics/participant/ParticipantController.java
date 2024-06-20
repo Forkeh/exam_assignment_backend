@@ -4,10 +4,12 @@ import kea.exam.athletics.discipline.Discipline;
 import kea.exam.athletics.participant.dto.ParticipantRequestDTO;
 import kea.exam.athletics.participant.dto.ParticipantResponseDTO;
 import kea.exam.athletics.participant.dto.ParticipantResponseFullDTO;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("participants")
@@ -19,9 +21,17 @@ public class ParticipantController {
         this.participantService = participantService;
     }
 
+
     @GetMapping
-    public ResponseEntity<List<ParticipantResponseDTO>> getAllParticipants() {
-        return ResponseEntity.ok(participantService.getAllParticipants());
+    public ResponseEntity<Page<ParticipantResponseDTO>> getAllParticipants(
+            @RequestParam Integer pageIndex,
+            @RequestParam Integer pageSize,
+            @RequestParam Optional<String> sortDir,
+            @RequestParam Optional<String> sortBy,
+            @RequestParam Optional<String> filterBy,
+            @RequestParam Optional<String> searchBy
+    ) {
+        return ResponseEntity.ok(participantService.getAllParticipants(pageIndex, pageSize, sortDir, sortBy, filterBy, searchBy));
     }
 
     @GetMapping("/{participantId}")
