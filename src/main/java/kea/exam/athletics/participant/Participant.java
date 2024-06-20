@@ -1,6 +1,7 @@
 package kea.exam.athletics.participant;
 
 import jakarta.persistence.*;
+import kea.exam.athletics.enums.Gender;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

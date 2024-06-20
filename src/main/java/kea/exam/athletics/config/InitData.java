@@ -2,7 +2,10 @@ package kea.exam.athletics.config;
 
 import kea.exam.athletics.book.Book;
 import kea.exam.athletics.book.BookRepository;
-import kea.exam.athletics.participant.Gender;
+import kea.exam.athletics.discipline.Discipline;
+import kea.exam.athletics.discipline.DisciplineRepository;
+import kea.exam.athletics.enums.Gender;
+import kea.exam.athletics.enums.ResultType;
 import kea.exam.athletics.participant.Participant;
 import kea.exam.athletics.participant.ParticipantRepository;
 import org.springframework.boot.ApplicationArguments;
@@ -17,10 +20,12 @@ public class InitData implements ApplicationRunner {
     private final BookRepository bookRepository;
 
     private final ParticipantRepository participantRepository;
+    private final DisciplineRepository disciplineRepository;
 
-    public InitData(BookRepository bookRepository, ParticipantRepository participantRepository) {
+    public InitData(BookRepository bookRepository, ParticipantRepository participantRepository, DisciplineRepository disciplineRepository) {
         this.bookRepository = bookRepository;
         this.participantRepository = participantRepository;
+        this.disciplineRepository = disciplineRepository;
     }
 
     @Override
@@ -95,5 +100,19 @@ public class InitData implements ApplicationRunner {
         );
 
         participantRepository.saveAll(participants);
+
+        List<Discipline> disciplines = List.of(
+                new Discipline("100m Sprint", ResultType.TIME),
+                new Discipline("200m Sprint", ResultType.TIME),
+                new Discipline("400m Sprint", ResultType.TIME),
+                new Discipline("Long Jump", ResultType.DISTANCE),
+                new Discipline("Triple Jump", ResultType.DISTANCE),
+                new Discipline("Shot Put", ResultType.DISTANCE),
+                new Discipline("Decathlon", ResultType.POINTS),
+                new Discipline("Heptathlon", ResultType.POINTS),
+                new Discipline("Pentathlon", ResultType.POINTS)
+        );
+
+        disciplineRepository.saveAll(disciplines);
     }
 }

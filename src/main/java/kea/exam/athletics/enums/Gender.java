@@ -1,4 +1,4 @@
-package kea.exam.athletics.participant;
+package kea.exam.athletics.enums;
 
 public enum Gender {
     MALE,
