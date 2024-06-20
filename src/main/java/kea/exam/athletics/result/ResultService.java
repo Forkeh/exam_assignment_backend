@@ -2,6 +2,7 @@ package kea.exam.athletics.result;
 
 import kea.exam.athletics.discipline.Discipline;
 import kea.exam.athletics.discipline.DisciplineRepository;
+import kea.exam.athletics.exceptions.BadRequestException;
 import kea.exam.athletics.exceptions.EntityNotFoundException;
 import kea.exam.athletics.participant.Participant;
 import kea.exam.athletics.participant.ParticipantRepository;
@@ -78,6 +79,12 @@ public class ResultService {
 
         Discipline discipline = disciplineRepository.findById(resultRequestDTO.disciplineId())
                 .orElseThrow(() -> new EntityNotFoundException("Discipline", resultRequestDTO.disciplineId()));
+
+        //Check if participant is assigned to discipline
+        if (!participant.getDisciplines()
+                .contains(discipline)) {
+            throw new BadRequestException("Participant is not assigned to discipline");
+        }
 
         ResultMapper resultMapper = new ResultMapper();
         Result result = resultMapper.toEntity(resultRequestDTO.result(), participant, discipline);
