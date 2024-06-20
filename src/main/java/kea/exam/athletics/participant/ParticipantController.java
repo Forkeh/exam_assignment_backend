@@ -35,6 +35,11 @@ public class ParticipantController {
         return ResponseEntity.ok(participantService.getAllParticipants(pageIndex, pageSize, sortDir, sortBy, filterBy, filterValue, searchBy));
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<ParticipantResponseFullDTO>> getAllParticipants() {
+        return ResponseEntity.ok(participantService.getAllParticipants());
+    }
+
     @GetMapping("/{participantId}")
     public ResponseEntity<ParticipantResponseFullDTO> getParticipantById(@PathVariable Long participantId) {
         return ResponseEntity.ok(participantService.getParticipantById(participantId));

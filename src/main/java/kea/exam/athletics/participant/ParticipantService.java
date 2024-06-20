@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -81,6 +82,14 @@ public class ParticipantService {
 
         return participants.map(participantMapper::toDTO);
 
+    }
+
+    public List<ParticipantResponseFullDTO> getAllParticipants() {
+        List<Participant> participants = participantRepository.findAll();
+        ParticipantMapper participantMapper = new ParticipantMapper();
+        return participants.stream()
+                .map(participantMapper::toFullDTO)
+                .toList();
     }
 
 
