@@ -1,7 +1,6 @@
 package kea.exam.athletics.participant;
 
 import kea.exam.athletics.discipline.Discipline;
-import kea.exam.athletics.discipline.DisciplineController;
 import kea.exam.athletics.discipline.DisciplineRepository;
 import kea.exam.athletics.discipline.DisciplineService;
 import kea.exam.athletics.discipline.utils.DisciplineMapper;
@@ -16,7 +15,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 import java.util.Optional;

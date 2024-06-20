@@ -1,7 +1,5 @@
 package kea.exam.athletics.config;
 
-import kea.exam.athletics.book.Book;
-import kea.exam.athletics.book.BookRepository;
 import kea.exam.athletics.discipline.Discipline;
 import kea.exam.athletics.discipline.DisciplineRepository;
 import kea.exam.athletics.enums.Gender;
@@ -25,13 +23,11 @@ public class InitData implements ApplicationRunner {
     private final List<Discipline> disciplines = new ArrayList<>();
     private final List<Result> results = new ArrayList<>();
 
-    private final BookRepository bookRepository;
     private final ParticipantRepository participantRepository;
     private final DisciplineRepository disciplineRepository;
     private final ResultRepository resultRepository;
 
-    public InitData(BookRepository bookRepository, ParticipantRepository participantRepository, DisciplineRepository disciplineRepository, ResultRepository resultRepository) {
-        this.bookRepository = bookRepository;
+    public InitData(ParticipantRepository participantRepository, DisciplineRepository disciplineRepository, ResultRepository resultRepository) {
         this.participantRepository = participantRepository;
         this.disciplineRepository = disciplineRepository;
         this.resultRepository = resultRepository;
@@ -42,29 +38,18 @@ public class InitData implements ApplicationRunner {
         System.out.println("Initializing data...");
 
         init();
-        createParticipants();
-        createDisciplines();
-        assignDisciplinesToParticipants();
-        assignResultsToParticipants();
+        
     }
 
 
     private void init() {
         System.out.println("Creating items in database...");
 
-        List<Book> books = List.of(
-                new Book("The Great Gatsby", "F. Scott Fitzgerald", 1925),
-                new Book("To Kill a Mockingbird", "Harper Lee", 1960),
-                new Book("1984", "George Orwell", 1949),
-                new Book("Pride and Prejudice", "Jane Austen", 1813),
-                new Book("The Catcher in the Rye", "J.D. Salinger", 1951),
-                new Book("The Lord of the Rings", "J.R.R. Tolkien", 1954),
-                new Book("Animal Farm", "George Orwell", 1945),
-                new Book("The Hobbit", "J.R.R. Tolkien", 1937),
-                new Book("The Little Prince", "Antoine de Saint-Exupéry", 1943),
-                new Book("The Da Vinci Code", "Dan Brown", 2003)
-        );
-        bookRepository.saveAll(books);
+        createParticipants();
+        createDisciplines();
+        assignDisciplinesToParticipants();
+        assignResultsToParticipants();
+
 
     }
 
