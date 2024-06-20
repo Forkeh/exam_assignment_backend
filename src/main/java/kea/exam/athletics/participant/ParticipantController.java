@@ -1,11 +1,9 @@
 package kea.exam.athletics.participant;
 
 import kea.exam.athletics.participant.dto.ParticipantResponseDTO;
+import kea.exam.athletics.participant.dto.ParticipantResponseFullDTO;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,5 +20,10 @@ public class ParticipantController {
     @GetMapping
     public ResponseEntity<List<ParticipantResponseDTO>> getAllParticipants() {
         return ResponseEntity.ok(participantService.getAllParticipants());
+    }
+
+    @GetMapping("/{participantId}")
+    public ResponseEntity<ParticipantResponseFullDTO> getParticipantById(@PathVariable Long participantId) {
+        return ResponseEntity.ok(participantService.getParticipantById(participantId));
     }
 }
