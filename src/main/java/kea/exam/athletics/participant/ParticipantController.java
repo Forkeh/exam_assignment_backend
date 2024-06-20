@@ -45,6 +45,11 @@ public class ParticipantController {
         return ResponseEntity.ok(participantService.createParticipant(participantRequestDTO));
     }
 
+    @PutMapping("/{participantId}")
+    public ResponseEntity<ParticipantResponseDTO> updateParticipant(@RequestBody ParticipantRequestDTO participantRequestDTO, @PathVariable Long participantId) {
+        return ResponseEntity.ok(participantService.updateParticipant(participantRequestDTO, participantId));
+    }
+
     @DeleteMapping("/{participantId}")
     public ResponseEntity<ParticipantResponseDTO> deleteParticipantById(@PathVariable Long participantId) {
         return ResponseEntity.ok(participantService.deleteParticipantById(participantId));

@@ -109,15 +109,7 @@ public class ParticipantService {
 
     public ParticipantResponseDTO createParticipant(ParticipantRequestDTO participantRequestDTO) {
 
-        String genderString = participantRequestDTO.gender();
-        Gender gender = Gender.valueOf(genderString.toUpperCase());
-
-        Participant participant = new Participant(
-                participantRequestDTO.name(),
-                gender,
-                participantRequestDTO.age(),
-                participantRequestDTO.club()
-        );
+        Participant participant = toEntity(participantRequestDTO);
 
         participantRepository.save(participant);
 
@@ -197,5 +189,49 @@ public class ParticipantService {
                 .remove(participant);
 
         return disciplineRepository.save(discipline);
+    }
+
+    public ParticipantResponseDTO updateParticipant(ParticipantRequestDTO participantRequestDTO, Long participantId) {
+        Participant participantToUpdate = participantRepository.findById(participantId)
+                .orElseThrow(() -> new EntityNotFoundException(participantRequestDTO.name(), participantId));
+
+        String genderString = participantRequestDTO.gender();
+        Gender gender = Gender.valueOf(genderString.toUpperCase());
+
+        participantToUpdate.setName(participantRequestDTO.name());
+        participantToUpdate.setGender(gender);
+        participantToUpdate.setAge(participantRequestDTO.age());
+        participantToUpdate.setClub(participantRequestDTO.club());
+        participantToUpdate.getDisciplines()
+                .clear();
+
+        participantRepository.save(participantToUpdate);
+
+        participantRequestDTO.disciplines()
+                .forEach(disciplineId -> {
+                    Discipline discipline = disciplineService.getDisciplineById(disciplineId);
+                    participantToUpdate.getDisciplines()
+                            .add(discipline);
+                });
+
+        participantRepository.save(participantToUpdate);
+
+        return toDTO(participantToUpdate);
+
+
+    }
+
+    public Participant toEntity(ParticipantRequestDTO participantRequestDTO) {
+        String genderString = participantRequestDTO.gender();
+        Gender gender = Gender.valueOf(genderString.toUpperCase());
+
+        return new Participant(
+                participantRequestDTO.name(),
+                gender,
+                participantRequestDTO.age(),
+                participantRequestDTO.club()
+        );
+
+
     }
 }
