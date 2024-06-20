@@ -2,6 +2,7 @@ package kea.exam.athletics.participant;
 
 import kea.exam.athletics.discipline.Discipline;
 import kea.exam.athletics.discipline.DisciplineController;
+import kea.exam.athletics.discipline.DisciplineRepository;
 import kea.exam.athletics.discipline.DisciplineService;
 import kea.exam.athletics.discipline.utils.DisciplineMapper;
 import kea.exam.athletics.enums.Gender;
@@ -27,11 +28,15 @@ public class ParticipantService {
     private final ParticipantRepository participantRepository;
     private final DisciplineMapper disciplineMapper;
     private final ResultService resultService;
+    private final DisciplineService disciplineService;
+    private final DisciplineRepository disciplineRepository;
 
-    public ParticipantService(ParticipantRepository participantRepository, DisciplineMapper disciplineMapper, ResultService resultService) {
+    public ParticipantService(ParticipantRepository participantRepository, DisciplineMapper disciplineMapper, ResultService resultService, DisciplineService disciplineService, DisciplineRepository disciplineRepository) {
         this.participantRepository = participantRepository;
         this.disciplineMapper = disciplineMapper;
         this.resultService = resultService;
+        this.disciplineService = disciplineService;
+        this.disciplineRepository = disciplineRepository;
     }
 
     public Page<ParticipantResponseDTO> getAllParticipants(
@@ -116,6 +121,15 @@ public class ParticipantService {
 
         participantRepository.save(participant);
 
+        participantRequestDTO.disciplines()
+                .forEach(disciplineId -> {
+                    Discipline discipline = disciplineService.getDisciplineById(disciplineId);
+                    participant.getDisciplines()
+                            .add(discipline);
+                });
+
+        participantRepository.save(participant);
+
         return toDTO(participant);
     }
 
@@ -163,5 +177,25 @@ public class ParticipantService {
         participantRepository.delete(participant);
 
         return toDTO(participant);
+    }
+
+    public Discipline addParticipantToDiscipline(Long disciplineId, Long participantId) {
+        Discipline discipline = disciplineService.getDisciplineById(disciplineId);
+        Participant participant = getParticipantEntityById(participantId);
+
+        discipline.getParticipants()
+                .add(participant);
+
+        return disciplineRepository.save(discipline);
+    }
+
+    public Discipline removeParticipantFromDiscipline(Long disciplineId, Long participantId) {
+        Discipline discipline = disciplineService.getDisciplineById(disciplineId);
+        Participant participant = getParticipantEntityById(participantId);
+
+        discipline.getParticipants()
+                .remove(participant);
+
+        return disciplineRepository.save(discipline);
     }
 }

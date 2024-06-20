@@ -7,6 +7,8 @@ public record ParticipantRequestDTO(
         String name,
         String gender,
         Integer age,
-        String club
+        String club,
+        List<Long> disciplines
+
 ) {
 }

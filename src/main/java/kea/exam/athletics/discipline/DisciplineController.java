@@ -26,13 +26,5 @@ public class DisciplineController {
         return ResponseEntity.ok(disciplineService.getDisciplineById(disciplineId));
     }
 
-    @PostMapping("/{disciplineId}/participants/{participantId}")
-    public ResponseEntity<Discipline> addParticipantToDiscipline(@PathVariable Long disciplineId, @PathVariable Long participantId) {
-        return ResponseEntity.ok(disciplineService.addParticipantToDiscipline(disciplineId, participantId));
-    }
 
-    @DeleteMapping("/{disciplineId}/participants/{participantId}")
-    public ResponseEntity<Discipline> removeParticipantFromDiscipline(@PathVariable Long disciplineId, @PathVariable Long participantId) {
-        return ResponseEntity.ok(disciplineService.removeParticipantFromDiscipline(disciplineId, participantId));
-    }
 }

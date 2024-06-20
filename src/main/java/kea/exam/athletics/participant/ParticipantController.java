@@ -49,4 +49,14 @@ public class ParticipantController {
     public ResponseEntity<ParticipantResponseDTO> deleteParticipantById(@PathVariable Long participantId) {
         return ResponseEntity.ok(participantService.deleteParticipantById(participantId));
     }
+
+    @DeleteMapping("/{participantId}/disciplines/{disciplineId}")
+    public ResponseEntity<Discipline> removeParticipantFromDiscipline(@PathVariable Long disciplineId, @PathVariable Long participantId) {
+        return ResponseEntity.ok(participantService.removeParticipantFromDiscipline(disciplineId, participantId));
+    }
+
+    @PostMapping("/{participantId}/disciplines/{disciplineId}")
+    public ResponseEntity<Discipline> addParticipantToDiscipline(@PathVariable Long disciplineId, @PathVariable Long participantId) {
+        return ResponseEntity.ok(participantService.addParticipantToDiscipline(disciplineId, participantId));
+    }
 }

@@ -12,11 +12,9 @@ import java.util.List;
 public class DisciplineService {
 
     private final DisciplineRepository disciplineRepository;
-    private final ParticipantService participantService;
 
-    public DisciplineService(DisciplineRepository disciplineRepository, ParticipantService participantService) {
+    public DisciplineService(DisciplineRepository disciplineRepository) {
         this.disciplineRepository = disciplineRepository;
-        this.participantService = participantService;
     }
 
     public Discipline getDisciplineById(Long disciplineId) {
@@ -32,16 +30,6 @@ public class DisciplineService {
                 .toList();
     }
 
-    public Discipline addParticipantToDiscipline(Long disciplineId, Long participantId) {
-        Discipline discipline = getDisciplineById(disciplineId);
-        Participant participant = participantService.getParticipantEntityById(participantId);
-
-        discipline.getParticipants()
-                .add(participant);
-
-        return disciplineRepository.save(discipline);
-    }
-
     public DisciplineResponseSmallDTO toSmallDTO(Discipline discipline) {
         return new DisciplineResponseSmallDTO(
                 discipline.getId(),
@@ -49,15 +37,5 @@ public class DisciplineService {
                 discipline.getResultType()
                         .toString()
         );
-    }
-
-    public Discipline removeParticipantFromDiscipline(Long disciplineId, Long participantId) {
-        Discipline discipline = getDisciplineById(disciplineId);
-        Participant participant = participantService.getParticipantEntityById(participantId);
-
-        discipline.getParticipants()
-                .remove(participant);
-
-        return disciplineRepository.save(discipline);
     }
 }
