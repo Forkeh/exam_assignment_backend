@@ -4,9 +4,14 @@ import kea.exam.athletics.exceptions.EntityNotFoundException;
 import kea.exam.athletics.participant.Participant;
 import kea.exam.athletics.result.dto.ResultResponseDTO;
 import kea.exam.athletics.result.utils.ResultMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ResultService {
@@ -17,15 +22,29 @@ public class ResultService {
     public ResultService(ResultRepository resultRepository) {
         this.resultRepository = resultRepository;
     }
-    
-    public List<ResultResponseDTO> getAllResults() {
+
+    public Page<ResultResponseDTO> getAllResults(
+            Integer pageNum,
+            Integer pageSize,
+            Optional<String> sortDir,
+            Optional<String> sortBy,
+            Optional<String> filterBy,
+            Optional<String> filterValue,
+            Optional<String> searchBy
+    ) {
+
+        Pageable pageable = PageRequest.of(
+                pageNum,
+                pageSize,
+                Sort.Direction.valueOf(sortDir.orElse("ASC")),
+                sortBy.orElse("id")
+        );
 
         ResultMapper resultMapper = new ResultMapper();
 
-        return resultRepository.findAll()
-                .stream()
-                .map(resultMapper::toDTO)
-                .toList();
+        return resultRepository.findAll(pageable)
+                .map(resultMapper::toDTO);
+
     }
 
 
