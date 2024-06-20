@@ -2,6 +2,8 @@ package kea.exam.athletics.result;
 
 import kea.exam.athletics.exceptions.EntityNotFoundException;
 import kea.exam.athletics.participant.Participant;
+import kea.exam.athletics.result.dto.ResultResponseDTO;
+import kea.exam.athletics.result.utils.ResultMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +16,16 @@ public class ResultService {
 
     public ResultService(ResultRepository resultRepository) {
         this.resultRepository = resultRepository;
+    }
+    
+    public List<ResultResponseDTO> getAllResults() {
+
+        ResultMapper resultMapper = new ResultMapper();
+
+        return resultRepository.findAll()
+                .stream()
+                .map(resultMapper::toDTO)
+                .toList();
     }
 
 

@@ -19,8 +19,8 @@ public class ResultController {
         this.resultService = resultService;
     }
 
-//    @GetMapping
-//    public ResponseEntity<List<ResultResponseDTO>> getAllResults() {
-//        return ResponseEntity.ok(resultService.getAllResults());
-//    }
+    @GetMapping
+    public ResponseEntity<List<ResultResponseDTO>> getAllResults() {
+        return ResponseEntity.ok(resultService.getAllResults());
+    }
 }
