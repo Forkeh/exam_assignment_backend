@@ -14,6 +14,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -384,9 +385,9 @@ public class InitData implements ApplicationRunner {
     }
 
     private void assignResultsToParticipants() {
-        results.add(new Result(ResultType.TIME, "10.500", participants.get(0), disciplines.get(0)));
-        results.add(new Result(ResultType.DISTANCE, "1200", participants.get(1), disciplines.get(3)));
-        results.add(new Result(ResultType.POINTS, "25", participants.get(3), disciplines.get(6)));
+        results.add(new Result(ResultType.TIME, "10.500", LocalDateTime.of(2024, 1, 1, 0, 0), participants.get(0), disciplines.get(0)));
+        results.add(new Result(ResultType.DISTANCE, "1200", LocalDateTime.of(2024, 2, 5, 0, 0), participants.get(1), disciplines.get(3)));
+        results.add(new Result(ResultType.POINTS, "25", LocalDateTime.of(2024, 3, 10, 0, 0), participants.get(3), disciplines.get(6)));
 
         resultRepository.saveAll(results);
     }

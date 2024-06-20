@@ -1,5 +1,6 @@
 package kea.exam.athletics.participant;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import kea.exam.athletics.discipline.Discipline;
 import kea.exam.athletics.enums.Gender;
@@ -7,7 +8,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -29,13 +32,14 @@ public class Participant {
 
     private String club;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "participant_discipline",
             joinColumns = @JoinColumn(name = "participant_id"),
             inverseJoinColumns = @JoinColumn(name = "discipline_id")
     )
-    private Set<Discipline> disciplines = new HashSet<>();
+    private List<Discipline> disciplines = new ArrayList<>();
 
 
     public Participant(String name, Gender gender, Integer age, String club) {

@@ -7,6 +7,9 @@ import kea.exam.athletics.participant.Participant;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.cglib.core.Local;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -23,6 +26,8 @@ public class Result {
 
     private String result;
 
+    private LocalDateTime date;
+
     @ManyToOne
     @JoinColumn(name = "participant_id")
     private Participant participant;
@@ -31,9 +36,10 @@ public class Result {
     @JoinColumn(name = "discipline_id")
     private Discipline discipline;
 
-    public Result(ResultType resultType, String result, Participant participant, Discipline discipline) {
+    public Result(ResultType resultType, String result, LocalDateTime date, Participant participant, Discipline discipline) {
         this.resultType = resultType;
         this.result = result;
+        this.date = date;
         this.participant = participant;
         this.discipline = discipline;
     }
