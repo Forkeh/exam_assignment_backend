@@ -81,16 +81,14 @@ public class ResultService {
                 .orElseThrow(() -> new EntityNotFoundException("Discipline", resultRequestDTO.disciplineId()));
 
         //Check if participant is assigned to discipline
-        if (!participant.getDisciplines()
-                .contains(discipline)) {
-            throw new BadRequestException("Participant is not assigned to discipline");
-        }
+        isParticipantAssignedToDiscipline(participant, discipline);
 
         ResultMapper resultMapper = new ResultMapper();
         Result result = resultMapper.toEntity(resultRequestDTO.result(), participant, discipline);
         resultRepository.save(result);
         return resultMapper.toDTO(result);
     }
+
 
     public ResultResponseDTO updateResult(ResultRequestDTO resultRequestDTO, Long resultId) {
         Result resultToUpdate = resultRepository.findById(resultId)
@@ -101,5 +99,12 @@ public class ResultService {
         ResultMapper resultMapper = new ResultMapper();
         resultRepository.save(resultToUpdate);
         return resultMapper.toDTO(resultToUpdate);
+    }
+
+    void isParticipantAssignedToDiscipline(Participant participant, Discipline discipline) {
+        if (!participant.getDisciplines()
+                .contains(discipline)) {
+            throw new BadRequestException("Participant is not assigned to discipline");
+        }
     }
 }
