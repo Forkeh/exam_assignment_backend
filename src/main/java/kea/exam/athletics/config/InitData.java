@@ -386,7 +386,7 @@ public class InitData implements ApplicationRunner {
         results.add(new Result(ResultType.DISTANCE, "2500", LocalDateTime.of(2025, 2, 5, 0, 0), participants.get(25), disciplines.get(5)));
         results.add(new Result(ResultType.POINTS, "45", LocalDateTime.of(2025, 3, 10, 0, 0), participants.get(27), disciplines.get(7)));
         results.add(new Result(ResultType.TIME, "60.500", LocalDateTime.of(2025, 4, 15, 0, 0), participants.get(29), disciplines.get(2)));
-        results.add(new Result(ResultType.DISTANCE, "3000", LocalDateTime.of(2025, 5, 20, 0, 0), participants.get(31), disciplines.get(6)));
+        results.add(new Result(ResultType.POINTS, "10", LocalDateTime.of(2025, 5, 20, 0, 0), participants.get(31), disciplines.get(6)));
         results.add(new Result(ResultType.POINTS, "50", LocalDateTime.of(2025, 6, 25, 0, 0), participants.get(33), disciplines.get(8)));
         results.add(new Result(ResultType.TIME, "70.500", LocalDateTime.of(2025, 7, 30, 0, 0), participants.get(35), disciplines.get(0)));
         results.add(new Result(ResultType.DISTANCE, "3500", LocalDateTime.of(2025, 8, 5, 0, 0), participants.get(37), disciplines.get(3)));

@@ -5,6 +5,7 @@ import kea.exam.athletics.participant.dto.ParticipantRequestDTO;
 import kea.exam.athletics.participant.dto.ParticipantResponseDTO;
 import kea.exam.athletics.participant.dto.ParticipantResponseFullDTO;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,7 +48,8 @@ public class ParticipantController {
 
     @PostMapping
     public ResponseEntity<ParticipantResponseDTO> createParticipant(@RequestBody ParticipantRequestDTO participantRequestDTO) {
-        return ResponseEntity.ok(participantService.createParticipant(participantRequestDTO));
+        return ResponseEntity.status(201)
+                .body(participantService.createParticipant(participantRequestDTO));
     }
 
     @PutMapping("/{participantId}")

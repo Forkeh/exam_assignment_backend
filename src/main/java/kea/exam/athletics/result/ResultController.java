@@ -33,7 +33,8 @@ public class ResultController {
 
     @PostMapping
     public ResponseEntity<ResultResponseDTO> createResult(@RequestBody ResultRequestDTO resultRequestDTO) {
-        return ResponseEntity.ok(resultService.createResult(resultRequestDTO));
+        return ResponseEntity.status(201)
+                .body(resultService.createResult(resultRequestDTO));
     }
 
     @PutMapping("/{resultId}")
