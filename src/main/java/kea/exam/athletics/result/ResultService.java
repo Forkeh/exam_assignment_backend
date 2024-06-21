@@ -37,10 +37,10 @@ public class ResultService {
             Integer pageSize,
             Optional<String> sortDir,
             Optional<String> sortBy,
-            Optional<String> filterBy,
-            Optional<String> filterValue,
-            Optional<String> searchBy
+            Optional<String> filterBy
     ) {
+
+        System.out.println("filterBy = " + filterBy);
 
         Pageable pageable = PageRequest.of(
                 pageNum,
@@ -49,10 +49,23 @@ public class ResultService {
                 sortBy.orElse("id")
         );
 
+        Page<Result> results;
+
+
+        if (filterBy.isPresent()) {
+            Long disciplineId = Long.parseLong(filterBy.get());
+            results = resultRepository.findAllByDisciplineId(pageable, disciplineId);
+        } else {
+            results = resultRepository.findAll(pageable);
+        }
+
+
         ResultMapper resultMapper = new ResultMapper();
 
-        return resultRepository.findAll(pageable)
-                .map(resultMapper::toDTO);
+        return results.map(resultMapper::toDTO);
+
+//        return resultRepository.findAll(pageable)
+//                .map(resultMapper::toDTO);
 
     }
 
