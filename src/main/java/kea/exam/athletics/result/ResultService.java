@@ -63,10 +63,6 @@ public class ResultService {
         ResultMapper resultMapper = new ResultMapper();
 
         return results.map(resultMapper::toDTO);
-
-//        return resultRepository.findAll(pageable)
-//                .map(resultMapper::toDTO);
-
     }
 
 
@@ -102,6 +98,12 @@ public class ResultService {
         return resultMapper.toDTO(result);
     }
 
+    public List<ResultResponseDTO> createMultipleResults(List<ResultRequestDTO> resultRequestDTOs) {
+        return resultRequestDTOs.stream()
+                .map(this::createResult)
+                .toList();
+    }
+
 
     public ResultResponseDTO updateResult(ResultRequestDTO resultRequestDTO, Long resultId) {
         Result resultToUpdate = resultRepository.findById(resultId)
@@ -120,4 +122,6 @@ public class ResultService {
             throw new BadRequestException("Participant is not assigned to discipline");
         }
     }
+
+
 }

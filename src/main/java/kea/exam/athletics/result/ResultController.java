@@ -37,6 +37,12 @@ public class ResultController {
                 .body(resultService.createResult(resultRequestDTO));
     }
 
+    @PostMapping("/multiple")
+    public ResponseEntity<List<ResultResponseDTO>> createMultipleResults(@RequestBody List<ResultRequestDTO> resultRequestDTOs) {
+        return ResponseEntity.status(201)
+                .body(resultService.createMultipleResults(resultRequestDTOs));
+    }
+
     @PutMapping("/{resultId}")
     public ResponseEntity<ResultResponseDTO> updateResult(@RequestBody ResultRequestDTO resultRequestDTO, @PathVariable Long resultId) {
         return ResponseEntity.ok(resultService.updateResult(resultRequestDTO, resultId));
