@@ -2,6 +2,7 @@ package kea.exam.athletics.result;
 
 import kea.exam.athletics.discipline.Discipline;
 import kea.exam.athletics.discipline.DisciplineRepository;
+import kea.exam.athletics.enums.Gender;
 import kea.exam.athletics.exceptions.BadRequestException;
 import kea.exam.athletics.exceptions.EntityNotFoundException;
 import kea.exam.athletics.participant.Participant;
@@ -37,7 +38,8 @@ public class ResultService {
             Integer pageSize,
             Optional<String> sortDir,
             Optional<String> sortBy,
-            Optional<String> filterBy
+            Optional<String> filterBy,
+            Optional<String> filterByGender
     ) {
 
         System.out.println("filterBy = " + filterBy);
@@ -51,14 +53,24 @@ public class ResultService {
 
         Page<Result> results;
 
+        if (filterBy.isPresent() && filterByGender.isPresent()) {
+            System.out.println("filterByGender = " + filterByGender.get());
+            Gender gender = Gender.valueOf(filterByGender.get());
 
-        if (filterBy.isPresent()) {
+            Long disciplineId = Long.parseLong(filterBy.get());
+            results = resultRepository.findAllByDisciplineIdAndParticipantGender(pageable, disciplineId, gender);
+
+        } else if (filterBy.isPresent()) {
+            System.out.println("filterBy = " + filterBy.get());
+
             Long disciplineId = Long.parseLong(filterBy.get());
             results = resultRepository.findAllByDisciplineId(pageable, disciplineId);
-        } else {
-            results = resultRepository.findAll(pageable);
-        }
 
+        } else {
+            System.out.println("No filterBy");
+            results = resultRepository.findAll(pageable);
+
+        }
 
         ResultMapper resultMapper = new ResultMapper();
 
@@ -122,6 +134,4 @@ public class ResultService {
             throw new BadRequestException("Participant is not assigned to discipline");
         }
     }
-
-
 }
