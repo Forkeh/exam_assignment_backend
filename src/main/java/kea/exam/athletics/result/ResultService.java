@@ -2,6 +2,7 @@ package kea.exam.athletics.result;
 
 import kea.exam.athletics.discipline.Discipline;
 import kea.exam.athletics.discipline.DisciplineRepository;
+import kea.exam.athletics.enums.AgeGroup;
 import kea.exam.athletics.enums.Gender;
 import kea.exam.athletics.exceptions.BadRequestException;
 import kea.exam.athletics.exceptions.EntityNotFoundException;
@@ -39,7 +40,8 @@ public class ResultService {
             Optional<String> sortDir,
             Optional<String> sortBy,
             Optional<String> filterBy,
-            Optional<String> filterByGender
+            Optional<String> filterByGender,
+            Optional<String> filterByAge
     ) {
 
         System.out.println("filterBy = " + filterBy);
@@ -53,15 +55,26 @@ public class ResultService {
 
         Page<Result> results;
 
-        if (filterBy.isPresent() && filterByGender.isPresent()) {
-            System.out.println("filterByGender = " + filterByGender.get());
+        if (filterBy.isPresent() && filterByGender.isPresent() && filterByAge.isPresent()) {
+            Gender gender = Gender.valueOf(filterByGender.get());
+            AgeGroup ageGroup = AgeGroup.valueOf(filterByAge.get());
+
+            Long disciplineId = Long.parseLong(filterBy.get());
+            results = resultRepository.findAllByDisciplineIdAndParticipantGenderAndParticipantAgeGroup(pageable, disciplineId, gender, ageGroup);
+
+        } else if (filterBy.isPresent() && filterByGender.isPresent()) {
             Gender gender = Gender.valueOf(filterByGender.get());
 
             Long disciplineId = Long.parseLong(filterBy.get());
             results = resultRepository.findAllByDisciplineIdAndParticipantGender(pageable, disciplineId, gender);
 
+        } else if (filterBy.isPresent() && filterByAge.isPresent()) {
+            AgeGroup ageGroup = AgeGroup.valueOf(filterByAge.get());
+
+            Long disciplineId = Long.parseLong(filterBy.get());
+            results = resultRepository.findAllByDisciplineIdAndParticipantAgeGroup(pageable, disciplineId, ageGroup);
+
         } else if (filterBy.isPresent()) {
-            System.out.println("filterBy = " + filterBy.get());
 
             Long disciplineId = Long.parseLong(filterBy.get());
             results = resultRepository.findAllByDisciplineId(pageable, disciplineId);

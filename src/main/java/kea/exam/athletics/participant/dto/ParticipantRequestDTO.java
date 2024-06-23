@@ -8,7 +8,8 @@ public record ParticipantRequestDTO(
         String gender,
         Integer age,
         String club,
-        List<Long> disciplines
+        List<Long> disciplines,
+        String ageGroup
 
 ) {
 }

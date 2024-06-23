@@ -32,6 +32,7 @@ public class ParticipantController {
             @RequestParam Optional<String> filterBy,
             @RequestParam Optional<String> filterValue,
             @RequestParam Optional<String> searchBy
+
     ) {
         return ResponseEntity.ok(participantService.getAllParticipants(pageIndex, pageSize, sortDir, sortBy, filterBy, filterValue, searchBy));
     }

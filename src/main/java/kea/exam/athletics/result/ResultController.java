@@ -27,9 +27,10 @@ public class ResultController {
             @RequestParam Optional<String> sortDir,
             @RequestParam Optional<String> sortBy,
             @RequestParam Optional<String> filterBy,
-            @RequestParam Optional<String> filterByGender
+            @RequestParam Optional<String> filterByGender,
+            @RequestParam Optional<String> filterByAge
     ) {
-        return ResponseEntity.ok(resultService.getAllResults(pageIndex, pageSize, sortDir, sortBy, filterBy, filterByGender));
+        return ResponseEntity.ok(resultService.getAllResults(pageIndex, pageSize, sortDir, sortBy, filterBy, filterByGender, filterByAge));
     }
 
     @PostMapping

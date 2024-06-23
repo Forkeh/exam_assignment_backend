@@ -1,5 +1,6 @@
 package kea.exam.athletics.result;
 
+import kea.exam.athletics.enums.AgeGroup;
 import kea.exam.athletics.enums.Gender;
 import kea.exam.athletics.participant.Participant;
 import org.springframework.data.domain.Page;
@@ -14,4 +15,8 @@ public interface ResultRepository extends JpaRepository<Result, Long> {
     Page<Result> findAllByDisciplineId(Pageable pageable, Long id);
 
     Page<Result> findAllByDisciplineIdAndParticipantGender(Pageable pageable, Long disciplineId, Gender gender);
+
+    Page<Result> findAllByDisciplineIdAndParticipantGenderAndParticipantAgeGroup(Pageable pageable, Long disciplineId, Gender gender, AgeGroup ageGroup);
+
+    Page<Result> findAllByDisciplineIdAndParticipantAgeGroup(Pageable pageable, Long disciplineId, AgeGroup ageGroup);
 }

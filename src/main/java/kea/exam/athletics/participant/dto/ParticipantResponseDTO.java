@@ -11,6 +11,7 @@ public record ParticipantResponseDTO(
         Gender gender,
         Integer age,
         String club,
-        List<String> disciplines
+        List<String> disciplines,
+        String ageGroup
 ) {
 }

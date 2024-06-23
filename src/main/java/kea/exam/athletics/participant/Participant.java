@@ -3,6 +3,7 @@ package kea.exam.athletics.participant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import kea.exam.athletics.discipline.Discipline;
+import kea.exam.athletics.enums.AgeGroup;
 import kea.exam.athletics.enums.Gender;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,6 +33,9 @@ public class Participant {
 
     private String club;
 
+    @Enumerated(EnumType.STRING)
+    private AgeGroup ageGroup;
+
     @JsonIgnore
     @ManyToMany
     @JoinTable(
@@ -42,10 +46,11 @@ public class Participant {
     private List<Discipline> disciplines = new ArrayList<>();
 
 
-    public Participant(String name, Gender gender, Integer age, String club) {
+    public Participant(String name, Gender gender, Integer age, String club, AgeGroup ageGroup) {
         this.name = name;
         this.gender = gender;
         this.age = age;
         this.club = club;
+        this.ageGroup = ageGroup;
     }
 }

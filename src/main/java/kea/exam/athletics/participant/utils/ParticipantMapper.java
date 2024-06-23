@@ -21,7 +21,9 @@ public class ParticipantMapper {
                 participant.getDisciplines()
                         .stream()
                         .map(disciplineMapper::toSmallDTO)
-                        .toList()
+                        .toList(),
+                participant.getAgeGroup()
+                        .toString()
         );
     }
 
@@ -35,7 +37,9 @@ public class ParticipantMapper {
                 participant.getDisciplines()
                         .stream()
                         .map(Discipline::getName)
-                        .toList()
+                        .toList(),
+                participant.getAgeGroup()
+                        .toString()
         );
     }
 }
