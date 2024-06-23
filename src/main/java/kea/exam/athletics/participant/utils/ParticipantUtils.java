@@ -2,7 +2,7 @@ package kea.exam.athletics.participant.utils;
 
 import kea.exam.athletics.enums.AgeGroup;
 
-public class ageConverter {
+public class ParticipantUtils {
 
     public AgeGroup ageToAgeGroup(int age) {
         if (age >= 6 && age <= 9) {
@@ -17,5 +17,4 @@ public class ageConverter {
             return AgeGroup.SENIOR;
         }
     }
-
 }

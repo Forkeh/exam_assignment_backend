@@ -9,7 +9,7 @@ import kea.exam.athletics.participant.dto.ParticipantRequestDTO;
 import kea.exam.athletics.participant.dto.ParticipantResponseDTO;
 import kea.exam.athletics.participant.dto.ParticipantResponseFullDTO;
 import kea.exam.athletics.participant.utils.ParticipantMapper;
-import kea.exam.athletics.participant.utils.ageConverter;
+import kea.exam.athletics.participant.utils.ParticipantUtils;
 import kea.exam.athletics.result.ResultService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -183,6 +183,7 @@ public class ParticipantService {
         participantToUpdate.setClub(participantRequestDTO.club());
         participantToUpdate.getDisciplines()
                 .clear();
+        participantToUpdate.setAgeGroup(new ParticipantUtils().ageToAgeGroup(participantRequestDTO.age()));
 
         participantRepository.save(participantToUpdate);
 
@@ -205,14 +206,14 @@ public class ParticipantService {
     public Participant toEntity(ParticipantRequestDTO participantRequestDTO) {
         String genderString = participantRequestDTO.gender();
         Gender gender = Gender.valueOf(genderString.toUpperCase());
-        ageConverter ageConverter = new ageConverter();
+        ParticipantUtils ParticipantUtils = new ParticipantUtils();
 
         return new Participant(
                 participantRequestDTO.name(),
                 gender,
                 participantRequestDTO.age(),
                 participantRequestDTO.club(),
-                ageConverter.ageToAgeGroup(participantRequestDTO.age())
+                ParticipantUtils.ageToAgeGroup(participantRequestDTO.age())
         );
 
 
