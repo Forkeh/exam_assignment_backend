@@ -27,11 +27,13 @@ public class ResultService {
     private final ResultRepository resultRepository;
     private final ParticipantRepository participantRepository;
     private final DisciplineRepository disciplineRepository;
+    private final ResultMapper resultMapper;
 
-    public ResultService(ResultRepository resultRepository, ParticipantRepository participantRepository, DisciplineRepository disciplineRepository) {
+    public ResultService(ResultRepository resultRepository, ParticipantRepository participantRepository, DisciplineRepository disciplineRepository, ResultMapper resultMapper) {
         this.resultRepository = resultRepository;
         this.participantRepository = participantRepository;
         this.disciplineRepository = disciplineRepository;
+        this.resultMapper = resultMapper;
     }
 
     public Page<ResultResponseDTO> getAllResults(
@@ -85,14 +87,12 @@ public class ResultService {
 
         }
 
-        ResultMapper resultMapper = new ResultMapper();
 
         return results.map(resultMapper::toDTO);
     }
 
 
     public ResultResponseDTO deleteResultById(Long resultId) {
-        ResultMapper resultMapper = new ResultMapper();
 
         Result result = resultRepository.findById(resultId)
                 .orElseThrow(() -> new EntityNotFoundException("Result", resultId));
@@ -117,7 +117,6 @@ public class ResultService {
         //Check if participant is assigned to discipline
         isParticipantAssignedToDiscipline(participant, discipline);
 
-        ResultMapper resultMapper = new ResultMapper();
         Result result = resultMapper.toEntity(resultRequestDTO.result(), participant, discipline);
         resultRepository.save(result);
         return resultMapper.toDTO(result);
@@ -136,7 +135,6 @@ public class ResultService {
 
         resultToUpdate.setResult(resultRequestDTO.result());
 
-        ResultMapper resultMapper = new ResultMapper();
         resultRepository.save(resultToUpdate);
         return resultMapper.toDTO(resultToUpdate);
     }

@@ -9,9 +9,11 @@ import kea.exam.athletics.participant.utils.ParticipantMapper;
 import kea.exam.athletics.result.Result;
 import kea.exam.athletics.result.dto.ResultRequestDTO;
 import kea.exam.athletics.result.dto.ResultResponseDTO;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
+@Component
 public class ResultMapper {
 
     public ResultResponseDTO toDTO(Result result) {
@@ -31,7 +33,6 @@ public class ResultMapper {
     }
 
     public Result toEntity(String result, Participant participant, Discipline discipline) {
-
 
         return new Result(
                 discipline.getResultType(),

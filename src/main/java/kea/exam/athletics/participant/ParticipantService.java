@@ -28,12 +28,14 @@ public class ParticipantService {
     private final ResultService resultService;
     private final DisciplineService disciplineService;
     private final DisciplineRepository disciplineRepository;
+    private final ParticipantMapper participantMapper;
 
-    public ParticipantService(ParticipantRepository participantRepository, ResultService resultService, DisciplineService disciplineService, DisciplineRepository disciplineRepository) {
+    public ParticipantService(ParticipantRepository participantRepository, ResultService resultService, DisciplineService disciplineService, DisciplineRepository disciplineRepository, ParticipantMapper participantMapper) {
         this.participantRepository = participantRepository;
         this.resultService = resultService;
         this.disciplineService = disciplineService;
         this.disciplineRepository = disciplineRepository;
+        this.participantMapper = participantMapper;
     }
 
     public Page<ParticipantResponseDTO> getAllParticipants(
@@ -79,7 +81,6 @@ public class ParticipantService {
             participants = participantRepository.findAll(pageable);
         }
 
-        ParticipantMapper participantMapper = new ParticipantMapper();
 
         return participants.map(participantMapper::toDTO);
 
@@ -87,7 +88,6 @@ public class ParticipantService {
 
     public List<ParticipantResponseFullDTO> getAllParticipants() {
         List<Participant> participants = participantRepository.findAll();
-        ParticipantMapper participantMapper = new ParticipantMapper();
         return participants.stream()
                 .map(participantMapper::toFullDTO)
                 .toList();
@@ -99,7 +99,6 @@ public class ParticipantService {
         Participant participant = participantRepository.findById(participantId)
                 .orElseThrow(() -> new EntityNotFoundException("Event", participantId));
 
-        ParticipantMapper participantMapper = new ParticipantMapper();
 
         return participantMapper.toFullDTO(participant);
 
@@ -113,7 +112,10 @@ public class ParticipantService {
 
     public ParticipantResponseDTO createParticipant(ParticipantRequestDTO participantRequestDTO) {
 
-        Participant participant = toEntity(participantRequestDTO);
+        if (participantRequestDTO.age() < 6)
+            throw new IllegalArgumentException("Participant must be at least 6 years old. Grow up!");
+
+        Participant participant = participantMapper.toEntity(participantRequestDTO);
 
         participantRepository.save(participant);
 
@@ -125,8 +127,6 @@ public class ParticipantService {
                 });
 
         participantRepository.save(participant);
-
-        ParticipantMapper participantMapper = new ParticipantMapper();
 
         return participantMapper.toDTO(participant);
     }
@@ -145,7 +145,6 @@ public class ParticipantService {
 
         participantRepository.delete(participant);
 
-        ParticipantMapper participantMapper = new ParticipantMapper();
 
         return participantMapper.toDTO(participant);
     }
@@ -196,25 +195,8 @@ public class ParticipantService {
 
         participantRepository.save(participantToUpdate);
 
-        ParticipantMapper participantMapper = new ParticipantMapper();
 
         return participantMapper.toDTO(participantToUpdate);
-
-
-    }
-
-    public Participant toEntity(ParticipantRequestDTO participantRequestDTO) {
-        String genderString = participantRequestDTO.gender();
-        Gender gender = Gender.valueOf(genderString.toUpperCase());
-        ParticipantUtils ParticipantUtils = new ParticipantUtils();
-
-        return new Participant(
-                participantRequestDTO.name(),
-                gender,
-                participantRequestDTO.age(),
-                participantRequestDTO.club(),
-                ParticipantUtils.ageToAgeGroup(participantRequestDTO.age())
-        );
 
 
     }
