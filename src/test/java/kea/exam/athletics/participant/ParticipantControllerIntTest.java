@@ -61,7 +61,7 @@ class ParticipantControllerIntTest {
 
     @Test
     void createParticipant() {
-        ParticipantRequestDTO requestDTO = new ParticipantRequestDTO("Leeroy", "MALE", 30, "Breakfast Club", List.of(1L, 2L));
+        ParticipantRequestDTO requestDTO = new ParticipantRequestDTO("Leeroy", "MALE", 30, "Breakfast Club", List.of(1L, 2L), "ADULT");
 
         ParticipantResponseDTO response = restClient.post()
                 .uri("/participants")
@@ -79,7 +79,7 @@ class ParticipantControllerIntTest {
 
     @Test
     void updateParticipant() {
-        ParticipantRequestDTO requestDTO = new ParticipantRequestDTO("Leeroy", "MALE", 30, "Breakfast Club", List.of(1L, 2L));
+        ParticipantRequestDTO requestDTO = new ParticipantRequestDTO("Leeroy", "MALE", 30, "Breakfast Club", List.of(1L, 2L), "ADULT");
 
         ParticipantResponseDTO response = restClient.put()
                 .uri("/participants/1")

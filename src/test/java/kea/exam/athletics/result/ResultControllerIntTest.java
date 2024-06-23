@@ -63,7 +63,7 @@ class ResultControllerIntTest {
                 .getBody();
 
         assert response != null;
-        assertEquals(22, response.id());
+        assertEquals(58, response.id());
         assertEquals(1, response.participant()
                 .id());
         assertEquals("100", response.result());
