@@ -32,7 +32,7 @@ public class ResultMapper {
         );
     }
 
-    public Result toEntity(String result, Participant participant, Discipline discipline) {
+    public Result toEntity(Long result, Participant participant, Discipline discipline) {
 
         return new Result(
                 discipline.getResultType(),

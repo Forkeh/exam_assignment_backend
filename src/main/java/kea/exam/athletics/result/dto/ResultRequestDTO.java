@@ -4,6 +4,6 @@ public record ResultRequestDTO(
 
         Long disciplineId,
         Long participantId,
-        String result
+        Long result
 ) {
 }

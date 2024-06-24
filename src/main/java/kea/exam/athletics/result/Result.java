@@ -24,7 +24,7 @@ public class Result {
     @Enumerated(EnumType.STRING)
     private ResultType resultType;
 
-    private String result;
+    private Long result;
 
     private LocalDateTime date;
 
@@ -36,7 +36,7 @@ public class Result {
     @JoinColumn(name = "discipline_id")
     private Discipline discipline;
 
-    public Result(ResultType resultType, String result, LocalDateTime date, Participant participant, Discipline discipline) {
+    public Result(ResultType resultType, Long result, LocalDateTime date, Participant participant, Discipline discipline) {
         this.resultType = resultType;
         this.result = result;
         this.date = date;

@@ -52,7 +52,7 @@ public class ResultService {
                 pageNum,
                 pageSize,
                 Sort.Direction.valueOf(sortDir.orElse("ASC")),
-                sortBy.orElse("id")
+                sortBy.orElse("result")
         );
 
         Page<Result> results;

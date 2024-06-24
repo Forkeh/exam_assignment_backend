@@ -8,6 +8,6 @@ public record ResultResponseDTO(
         Long id,
         DisciplineResponseSmallDTO discipline,
         ParticipantResponseDTO participant,
-        String result
+        Long result
 ) {
 }
