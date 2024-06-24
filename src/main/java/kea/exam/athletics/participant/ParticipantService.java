@@ -117,14 +117,9 @@ public class ParticipantService {
 
         Participant participant = participantMapper.toEntity(participantRequestDTO);
 
-        participantRepository.save(participant);
+        List<Discipline> disciplines = disciplineService.getDisciplinesById(participantRequestDTO.disciplines());
 
-        participantRequestDTO.disciplines()
-                .forEach(disciplineId -> {
-                    Discipline discipline = disciplineService.getDisciplineById(disciplineId);
-                    participant.getDisciplines()
-                            .add(discipline);
-                });
+        participant.setDisciplines(disciplines);
 
         participantRepository.save(participant);
 

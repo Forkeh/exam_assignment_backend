@@ -30,6 +30,10 @@ public class DisciplineService {
                 .toList();
     }
 
+    public List<Discipline> getDisciplinesById(List<Long> disciplineId) {
+        return disciplineRepository.findAllById(disciplineId);
+    }
+
     public DisciplineResponseSmallDTO toSmallDTO(Discipline discipline) {
         return new DisciplineResponseSmallDTO(
                 discipline.getId(),
@@ -38,4 +42,6 @@ public class DisciplineService {
                         .toString()
         );
     }
+
+
 }
