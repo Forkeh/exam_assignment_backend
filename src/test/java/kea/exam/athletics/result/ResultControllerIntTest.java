@@ -37,23 +37,9 @@ class ResultControllerIntTest {
         restClient = RestClient.create("http://localhost:" + randomServerPort);
     }
 
-    //TODO: How to test Pageables?
-//    @Test
-//    void getAllResults() {
-//
-//        ResponseEntity<Page<ResultResponseDTO>> response = restClient.get()
-//                .uri("/results?pageIndex=0&pageSize=10")
-//                .retrieve()
-//                .toEntity(new ParameterizedTypeReference<Page<ResultResponseDTO>>() {
-//                });
-//
-//        assertEquals(HttpStatus.OK, response.getStatusCode());
-//        assertNotNull(response.getBody());
-//    }
-
     @Test
     void createResult() {
-        ResultRequestDTO resultRequestDTO = new ResultRequestDTO(1L, 1L, "100");
+        ResultRequestDTO resultRequestDTO = new ResultRequestDTO(1L, 1L, 100L);
 
         ResultResponseDTO response = restClient.post()
                 .uri("/results")
@@ -66,13 +52,13 @@ class ResultControllerIntTest {
         assertEquals(58, response.id());
         assertEquals(1, response.participant()
                 .id());
-        assertEquals("100", response.result());
+        assertEquals(100, response.result());
 
     }
 
     @Test
     void updateResult() {
-        ResultRequestDTO resultRequestDTO = new ResultRequestDTO(1L, 1L, "999");
+        ResultRequestDTO resultRequestDTO = new ResultRequestDTO(1L, 1L, 999L);
 
         ResultResponseDTO response = restClient.put()
                 .uri("/results/1")
@@ -85,7 +71,7 @@ class ResultControllerIntTest {
         assertEquals(1, response.id());
         assertEquals(1, response.participant()
                 .id());
-        assertEquals("999", response.result());
+        assertEquals(999, response.result());
     }
 
     @Test
@@ -100,7 +86,7 @@ class ResultControllerIntTest {
         assertEquals(1, response.id());
         assertEquals(1, response.participant()
                 .id());
-        assertEquals("10.500", response.result());
+        assertEquals(10500, response.result());
 
         // Attempt to retrieve the result after deletion
         try {

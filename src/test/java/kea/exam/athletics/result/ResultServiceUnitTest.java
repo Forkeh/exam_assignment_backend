@@ -57,14 +57,14 @@ class ResultServiceUnitTest {
 
     @Test
     void createResult_success() {
-        ResultRequestDTO requestDTO = new ResultRequestDTO(1L, 1L, "100");
+        ResultRequestDTO requestDTO = new ResultRequestDTO(1L, 1L, 100L);
         Participant participant = new Participant("John", Gender.MALE, 25, "Lions Club", AgeGroup.ADULT);
         Discipline discipline = new Discipline("100m Sprint", ResultType.TIME);
         Result result = new Result(ResultType.TIME, requestDTO.result(), LocalDateTime.of(2024, 1, 1, 0, 0), participant, discipline);
         DisciplineResponseSmallDTO disciplineResponseSmallDTO = new DisciplineResponseSmallDTO(discipline.getId(), discipline.getName(), discipline.getResultType()
                 .toString());
         ParticipantResponseDTO participantResponseDTO = new ParticipantResponseDTO(participant.getId(), participant.getName(), participant.getGender(), participant.getAge(), participant.getClub(), List.of("100m", "200m"), "ADULT");
-        ResultResponseDTO resultResponseDTO = new ResultResponseDTO(1L, disciplineResponseSmallDTO, participantResponseDTO, "100");
+        ResultResponseDTO resultResponseDTO = new ResultResponseDTO(1L, disciplineResponseSmallDTO, participantResponseDTO, 100L);
         participant.getDisciplines()
                 .add(discipline);
 
@@ -85,7 +85,7 @@ class ResultServiceUnitTest {
 
     @Test
     void createResult_participantNotFound() {
-        ResultRequestDTO requestDTO = new ResultRequestDTO(1L, 2L, "100");
+        ResultRequestDTO requestDTO = new ResultRequestDTO(1L, 2L, 100L);
 
         when(participantRepository.findById(requestDTO.participantId())).thenReturn(Optional.empty());
 
@@ -95,7 +95,7 @@ class ResultServiceUnitTest {
 
     @Test
     void createResult_disciplineNotFound() {
-        ResultRequestDTO requestDTO = new ResultRequestDTO(1L, 2L, "100");
+        ResultRequestDTO requestDTO = new ResultRequestDTO(1L, 2L, 100L);
         Participant participant = new Participant();
 
         when(participantRepository.findById(requestDTO.participantId())).thenReturn(Optional.of(participant));
@@ -108,7 +108,7 @@ class ResultServiceUnitTest {
 
     @Test
     void createResult_participantNotAssignedToDiscipline() {
-        ResultRequestDTO requestDTO = new ResultRequestDTO(1L, 2L, "100");
+        ResultRequestDTO requestDTO = new ResultRequestDTO(1L, 2L, 100L);
         Participant participant = new Participant();
         Discipline discipline = new Discipline();
 
